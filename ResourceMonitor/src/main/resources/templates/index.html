@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>Resource Monitor</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+		<style type="text/css">
+		.col-md-3:nth-child(4n+1) { clear: left; }
+		</style>
+	</head>
+	<body style="padding: 10px;">
+		<div class="container-fluid">
+			<div class="row">
+				<th:block th:each="entry,iterStat : ${@results}">
+				<div class="col-md-3">
+					<div style="border: 1px solid black; border-radius: 10px; min-height: 100px; padding: 10px; margin: 10px;" th:classappend="${ entry.value.passed ? 'bg-success' : 'bg-danger' }">
+						<b>[[${ entry.key }]]</b><br/>
+						<b>Time:</b> [[${ #dates.format( entry.value.time, 'MM/dd/yyyy hh:mm:ss') }]]<br/>
+						<b>Message:</b> [[${ entry.value.message }]]<br/>
+					</div>
+				</div>
+				</th:block>
+			</div>
+		</div>
+		<script type="text/javascript">
+		setTimeout( function() {
+			location.reload();
+		}, 30000 );
+		</script>
+	</body>
+</html>
